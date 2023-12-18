@@ -1,5 +1,7 @@
 from google.cloud import bigquery
 
+
+
 # Create a BigQuery client
 bigquery_client = bigquery.Client()
 
@@ -22,9 +24,13 @@ def get_geojson_data(table_dict):
 
 def download_blob(table_id, column_name, bigquery_client):
     """Fetches a row with the latest prediction_date from the BigQuery table."""
+    # Specify the project and dataset
+    project = "firenet-99"
+    dataset = "geojson_predictions"
+
     query = f"""
     SELECT `{column_name}`
-    FROM `{table_id}`
+    FROM `{project}.{dataset}.{table_id}`
     ORDER BY prediction_date DESC
     LIMIT 1
     """

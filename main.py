@@ -1,9 +1,13 @@
 from flask import Flask, render_template, Response, jsonify
 from utils import get_geojson_data
 
+
 app = Flask(__name__)
 
-# Define your table_dict here
+
+# table_dict here, form is {table_id: column_name}. serve_geojson will
+# fetch the value from latest row from the tables with the corresponding column name and return
+# The geojson as a dict, where each key's associated geojson is a layer in the leaflet map
 table_dict = {
     "goesmask": "goesmask_geojson",
     "viirs_mask": "viirs_mask_geojson"

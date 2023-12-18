@@ -1,18 +1,42 @@
-var map = L.map('map').setView([0, 0], 2);
+// Initialize the map with a default view
+var map = L.map('map').setView([35.0, -99.0], 4);
+// Add a tile layer to the map
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
+    maxZoom: 17,
 }).addTo(map);
 
+//creating layers for the map
 fetch('/geojson')
     .then(response => response.json())
     .then(data => {
-        // Add the geojson data from the first table as points
-        L.geoJSON(JSON.parse(data["goesmask"])).addTo(map);
-
-        // Add the geojson data from the second table as red polygons
-        L.geoJSON(JSON.parse(data["viirs_mask"]), {
-            style: function(feature) {
-                return {color: "red", weight: 6};
+        // Add the geojson data from the GOES mask table as small red circles
+        var goesmaskLayer = L.geoJSON(JSON.parse(data["goesmask"]), {
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, {
+                    radius: 2,
+                    fillColor: "red",
+                    color: "#000",
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 1
+                });
             }
-        }).addTo(map);
+        });
+
+        // Add the geojson data from the VIIRS mask table as orange polygons
+        var viirsMaskLayer = L.geoJSON(JSON.parse(data["viirs_mask"]), {
+            style: function(feature) {
+                return {color: "orange", weight: 8};
+            }
+        });
+
+        // Add the layers to the map and to the layers control
+        var overlayLayers = {
+            "GOES Mask": goesmaskLayer,
+            "VIIRS Mask": viirsMaskLayer
+        };
+        
+        L.control.layers({}, overlayLayers).addTo(map);
+        goesmaskLayer.addTo(map);
+        viirsMaskLayer.addTo(map);
     });
