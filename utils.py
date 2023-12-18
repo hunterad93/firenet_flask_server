@@ -31,10 +31,13 @@ def query_most_recent_geojson(table_id, column_name, bigquery_client):
     project = "firenet-99"
     dataset = "geojson_predictions"
 
+    # Determine the column to order by based on the table_id
+    order_by_column = "datetime_added"
+
     query = f"""
     SELECT `{column_name}`
     FROM `{project}.{dataset}.{table_id}`
-    ORDER BY prediction_date DESC
+    ORDER BY {order_by_column} DESC
     LIMIT 1
     """
     query_job = bigquery_client.query(query)  # API request

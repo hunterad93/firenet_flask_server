@@ -9,7 +9,7 @@ app = Flask(__name__)
 # fetch the value from latest row from the tables with the corresponding column name and return
 # The geojson as a dict, where each key's associated geojson is a layer in the leaflet map
 table_dict = {
-    "goesmask": "goesmask_geojson",
+    "goes_mask": "goes_mask_geojson",
     "viirs_mask": "viirs_mask_geojson"
 }
 
