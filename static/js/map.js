@@ -6,5 +6,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 fetch('/geojson')
     .then(response => response.json())
     .then(data => {
-        L.geoJSON(data).addTo(map);
+        // Add the geojson data from the first table as points
+        L.geoJSON(JSON.parse(data["goesmask"])).addTo(map);
+
+        // Add the geojson data from the second table as red polygons
+        L.geoJSON(JSON.parse(data["viirs_mask"]), {
+            style: function(feature) {
+                return {color: "red", weight: 6};
+            }
+        }).addTo(map);
     });
