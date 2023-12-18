@@ -1,8 +1,15 @@
 from flask import Flask, render_template, Response, jsonify
 from utils import get_geojson_data
 
+import logging
 
 app = Flask(__name__)
+
+# Set up logging
+app.logger.setLevel(logging.DEBUG)
+handler = logging.StreamHandler()
+handler.setLevel(logging.DEBUG)
+app.logger.addHandler(handler)
 
 
 # table_dict here, form is {table_id: column_name}. serve_geojson will

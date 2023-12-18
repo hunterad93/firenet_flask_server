@@ -1,7 +1,5 @@
 from google.cloud import bigquery
 
-
-
 def get_geojson_data(table_dict):
     """
     Given a dictionary of table IDs and column names, return a dictionary of geojson data for each table.

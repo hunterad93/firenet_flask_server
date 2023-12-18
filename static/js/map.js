@@ -10,7 +10,7 @@ fetch('/geojson')
     .then(response => response.json())
     .then(data => {
         // Add the geojson data from the GOES mask table as small red circles
-        var goesmaskLayer = L.geoJSON(JSON.parse(data["goesmask"]), {
+        var goesmaskLayer = L.geoJSON(JSON.parse(data["goes_mask"]), {
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, {
                     radius: 2,
