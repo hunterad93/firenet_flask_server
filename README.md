@@ -25,5 +25,4 @@ The server is configured for deployment on Google Cloud using the `app.yaml` fil
 The map is initialized in `map.js`. It fetches the geojson data from the `/geojson` route and adds it as layers to the map.
 
 ## Data Fetching
-The `get_geojson_data` function in `utils.py` fetches the geojson data from BigQuery. It uses the table and column names specified in `main.py` to fetch the most recent row from each table and return the geojson data. Set an environmental var
-specifying path to service account .JSON for local testing.
+The `get_geojson_data` function in `utils.py` fetches the geojson data from BigQuery. It uses the table and column names specified in `main.py` to fetch the most recent row from each table and return the geojson data.
