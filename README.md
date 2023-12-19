@@ -15,6 +15,8 @@ The data is fetched from specified tables and columns, defined in `main.py`.
 
 The server has two routes: the root route which serves the map, and the `/geojson` route which returns the geojson data as a JSON object.
 
+Find more info and view the map at the project's webpage: https://sites.google.com/view/firenet-/home
+
 ## Requirements
 The server requires Python 3.9 and the packages listed in `requirements.txt`.
 
