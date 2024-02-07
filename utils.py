@@ -30,8 +30,8 @@ def query_most_recent_geojson(table_id, column_name, bigquery_client):
     dataset = "geojson_predictions"
 
     # Determine the column to order by based on the table_id
-    order_by_column = "datetime_added"
-
+    order_by_column = "prediction_date"
+    
     query = f"""
     SELECT `{column_name}`
     FROM `{project}.{dataset}.{table_id}`

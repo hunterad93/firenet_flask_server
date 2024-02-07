@@ -3,6 +3,7 @@ var map;
 var layerControl;
 var goesmaskLayer;
 var viirsMaskLayer;
+var unetMaskLayer
 
 // Function to fetch data and update map
 function updateMap() {
@@ -29,6 +30,10 @@ function updateMap() {
                 map.removeLayer(viirsMaskLayer);
                 layerControl.removeLayer(viirsMaskLayer);
             }
+            if (typeof unetMaskLayer !== 'undefined') {
+                map.removeLayer(unetMaskLayer);
+                layerControl.removeLayer(unetMaskLayer);
+            }
 
             // Add the new data to the map as layers
             goesmaskLayer = L.geoJSON(JSON.parse(data["goes_mask"]), {
@@ -50,6 +55,12 @@ function updateMap() {
                 }
             }).addTo(map);
 
+            unetMaskLayer = L.geoJSON(JSON.parse(data["unet"]), {
+                style: function(feature) {
+                    return {color: "blue", weight: 8};
+                }
+            }).addTo(map);
+
             // If layer control exists, remove it
             if (typeof layerControl !== 'undefined') {
                 layerControl.remove();
@@ -58,7 +69,8 @@ function updateMap() {
             // Add the layers to the layers control
             var overlayLayers = {
                 "GOES Mask": goesmaskLayer,
-                "VIIRS Mask": viirsMaskLayer
+                "VIIRS Mask": viirsMaskLayer,
+                "UNET Mask": unetMaskLayer
             };
 
             // Add new layer control

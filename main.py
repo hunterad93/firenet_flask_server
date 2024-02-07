@@ -17,7 +17,8 @@ app.logger.addHandler(handler)
 # The geojson as a dict, where each key's associated geojson is a layer in the leaflet map
 table_dict = {
     "goes_mask": "goes_mask_geojson",
-    "viirs_mask": "viirs_mask_geojson"
+    "viirs_mask": "viirs_mask_geojson",
+    "unet": "unet_geojson"
 }
 
 @app.route('/')
