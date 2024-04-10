@@ -18,7 +18,8 @@ app.logger.addHandler(handler)
 table_dict = {
     "goes_mask": "goes_mask_geojson",
     "viirs_mask": "viirs_mask_geojson",
-    "unet": "unet_geojson"
+    "unet": "unet_geojson",
+    "modis_mask": "modis_mask_geojson"
 }
 
 @app.route('/')

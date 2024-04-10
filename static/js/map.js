@@ -3,7 +3,8 @@ var map;
 var layerControl;
 var goesmaskLayer;
 var viirsMaskLayer;
-var unetMaskLayer
+var unetMaskLayer;
+var modisMaskLayer;
 
 // Function to fetch data and update map
 function updateMap() {
@@ -34,6 +35,10 @@ function updateMap() {
                 map.removeLayer(unetMaskLayer);
                 layerControl.removeLayer(unetMaskLayer);
             }
+            if (typeof modisMaskLayer !== 'undefined') {
+                map.removeLayer(modisMaskLayer);
+                layerControl.removeLayer(modisMaskLayer);
+            }
 
             // Add the new data to the map as layers
             goesmaskLayer = L.geoJSON(JSON.parse(data["goes_mask"]), {
@@ -61,6 +66,12 @@ function updateMap() {
                 }
             }).addTo(map);
 
+            modisMaskLayer = L.geoJSON(JSON.parse(data["modis_mask"]), {
+                style: function(feature) {
+                    return {color: "green", weight: 8};
+                }
+            }).addTo(map);
+
             // If layer control exists, remove it
             if (typeof layerControl !== 'undefined') {
                 layerControl.remove();
@@ -70,7 +81,8 @@ function updateMap() {
             var overlayLayers = {
                 "GOES Mask": goesmaskLayer,
                 "VIIRS Mask": viirsMaskLayer,
-                "UNET Mask": unetMaskLayer
+                "UNET Mask": unetMaskLayer,
+                "MODIS Mask": modisMaskLayer
             };
 
             // Add new layer control
@@ -82,4 +94,4 @@ function updateMap() {
 updateMap();
 
 // Add event listener to refresh button to update map when clicked
-document.getElementById('refreshButton').addEventListener('click', updateMap);
+// document.getElementById('refreshButton').addEventListener('click', updateMap);
